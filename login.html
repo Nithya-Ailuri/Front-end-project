@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+    .login-container {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        width: 300px;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #2575fc;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background: #1b5edb;
+    }
+    .error {
+        color: red;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .success {
+        color: green;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .show-pass {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+    .show-pass input {
+        width: auto;
+        margin-right: 5px;
+    }
+</style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>🔑 Login</h2>
+    <input type="text" id="username" placeholder="Enter username">
+    <input type="password" id="password" placeholder="Enter password">
+    
+    <div class="show-pass">
+        <input type="checkbox" id="togglePass"> Show Password
+    </div>
+
+    <button onclick="login()">Login</button>
+    <div id="message"></div>
+</div>
+
+<script>
+    // Hardcoded credentials
+    const USERNAME = "nithya";
+    const PASSWORD = "020704";
+
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const message = document.getElementById("message");
+    const togglePass = document.getElementById("togglePass");
+
+    function login() {
+        const enteredUser = usernameInput.value.trim();
+        const enteredPass = passwordInput.value.trim();
+
+        if (enteredUser === "" || enteredPass === "") {
+            message.innerHTML = "<p class='error'>⚠ Please fill all fields</p>";
+            return;
+        }
+
+        if (enteredUser === USERNAME && enteredPass === PASSWORD) {
+            message.innerHTML = "<p class='success'>✅ Login Successful!</p>";
+            setTimeout(() => {
+                alert("Welcome " + enteredUser + "!");
+                // Redirect to another page
+                window.location.href = "home.html";
+            }, 800);
+        } else {
+            message.innerHTML = "<p class='error'>❌ Invalid username or password</p>";
+        }
+    }
+
+    // Show/hide password
+    togglePass.addEventListener("change", function () {
+        passwordInput.type = this.checked ? "text" : "password";
+    });
+</script>
+
+</body>
+</html>
